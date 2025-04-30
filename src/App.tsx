@@ -15,25 +15,22 @@ export const App: React.FC = () => {
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const filterPeople = useCallback(
-    (text: string) => {
-      const trimmedQuery = text.trim();
+  const filterPeople = useCallback((text: string) => {
+    const trimmedQuery = text.trim();
 
-      if (!trimmedQuery) {
-        setSuggestions(peopleFromServer);
+    if (!trimmedQuery) {
+      setSuggestions(peopleFromServer);
 
-        return;
-      }
+      return;
+    }
 
-      const lowercaseQuery = trimmedQuery.toLowerCase();
-      const filteredPeople = peopleFromServer.filter(person =>
-        person.name.toLowerCase().includes(lowercaseQuery),
-      );
+    const lowercaseQuery = trimmedQuery.toLowerCase();
+    const filteredPeople = peopleFromServer.filter(person =>
+      person.name.toLowerCase().includes(lowercaseQuery),
+    );
 
-      setSuggestions(filteredPeople);
-    },
-    [peopleFromServer],
-  );
+    setSuggestions(filteredPeople);
+  }, []);
 
   useEffect(() => {
     if (timeoutRef.current) {
